@@ -1,5 +1,5 @@
 {
-  "name": "@twowheelstogo/api-plugin-catalog-menu",
+  "name": "@twowheelstogo/api-plugin-modifier-groups",
   "description": "Boilerplate Example plugin for the Reaction API",
   "version": "0.0.0-development",
   "main": "index.js",
