@@ -1,0 +1,37 @@
+"A Modifier Group"
+type ModifierGroup {
+    "Modifier group ID"
+    id: ID!
+
+    "the name of the modifier group"
+    name: String!
+
+    "timestamp of creation"
+    createdAt: DateTime!
+
+    "last time udpate timestamp"
+    updatedAt: DateTime!
+
+    "description of the modifier group"
+    description: String
+
+    "related products"
+    products: [Product]
+}
+
+extend type Product {
+    "related modified groups"
+    modifierGroups: [ModifierGroup]
+}
+
+extend type CatalogProduct {
+    "related modified groups"
+    modifierGroups: [ModifierGroup]
+}
+
+extend type Query {
+    "gets a single modifier group by id"
+    modifierGroup(
+        id: ID!
+    ): ModifierGroup!
+}
