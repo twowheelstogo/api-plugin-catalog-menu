@@ -12,11 +12,40 @@ type ModifierGroup {
     "last time udpate timestamp"
     updatedAt: DateTime!
 
-    "description of the modifier group"
-    description: String
+    "note of the modifier group"
+    note: String
 
-    "related products"
-    products: [Product]
+    "related items"
+    items: [Product]
+}
+
+"Rules for modifier groups"
+type ModifierGroupRules {
+
+}
+
+"Mutation input for a modifier group"
+input ModifierGroupInput {
+    "Name for the modifier group"
+    name: String
+    
+    "note for the modifier group"
+    note: String
+}
+
+"Input for the `createModifierGroup` mutation"
+input CreateModifierGroupInput {
+   "Modifier Group input"
+   modifierGroupInput: ModifierGroupInput!
+}
+
+"Response payload of `createModifierGroup` mutation"
+type CreateModifierGroupPayload {
+  "The same string you sent with the mutation params, for matching mutation calls with their responses"
+  clientMutationId: String
+
+  "The created modifier group"
+  modifierGroup: ModifierGroup!
 }
 
 extend type Product {
