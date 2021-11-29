@@ -5,6 +5,6 @@ export default {
     name: (node) => node.name,
     createdAt: (node) => node.createdAt,
     updatedAt: (node) => node.updatedAt,
-    description: (node) => node.description,
-    products: (node, __, ctx) => null
+    note: (node) => node.note,
+    items: (node, __, ctx) => null
 }

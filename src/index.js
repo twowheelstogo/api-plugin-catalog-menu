@@ -17,6 +17,9 @@ export default async function register(app) {
     collections: {
       ModifierGroups: {
         name: "ModifierGroups"
+      },
+      ModifierGroupItems: {
+        name: "ModifierGroupItems"
       }
     },
     queries,

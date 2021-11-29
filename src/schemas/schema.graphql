@@ -16,11 +16,24 @@ type ModifierGroup {
     note: String
 
     "related items"
-    items: [Product]
+    items: [ModifierGroupItem]
 }
 
-"Rules for modifier groups"
-type ModifierGroupRules {
+type ModifierGroupItem {
+    "Product configuration data"
+    productConfiguration: ProductConfiguration!
+    
+    pricing: ProductPricingInfo
+
+    title: String!
+
+    pageTitle: String
+
+    description: String
+
+    modifierGroups: [ModifierGroup]
+
+    modifierGroupIds: [ID] 
 
 }
 
@@ -49,11 +62,17 @@ type CreateModifierGroupPayload {
 }
 
 extend type Product {
+    "The list of modifier group IDs that have been applied to this product"
+    modifierGroupIds: [ID]
+
     "related modified groups"
     modifierGroups: [ModifierGroup]
 }
 
 extend type CatalogProduct {
+    "The list of modifier group IDs that have been applied to this product"
+    modifierGroupIds: [ID]
+
     "related modified groups"
     modifierGroups: [ModifierGroup]
 }
