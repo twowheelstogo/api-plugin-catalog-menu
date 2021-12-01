@@ -22,7 +22,9 @@ export default async function createModifierGroup(context, input) {
         name,
         note,
         createdAt: new Date(),
-        updatedAt: new Date()
+        updatedAt: new Date(),
+        items: null,
+        required: false
     };
 
     await ModifierGroup.insertOne(modifierGroupInput);

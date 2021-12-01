@@ -17,24 +17,53 @@ type ModifierGroup {
 
     "related items"
     items: [ModifierGroupItem]
+
+    "Check if modifier group is required"
+    required: Boolean
 }
 
 type ModifierGroupItem {
+    "ID of the item"
+    id: ID!
+
     "Product configuration data"
     productConfiguration: ProductConfiguration!
-    
+
+    "Pricing of the modifier group item"
     pricing: ProductPricingInfo
 
+    "Title of the modifier group item"
     title: String!
 
+    "Page title of the modifier group item"
     pageTitle: String
 
+    "description of the modifier group item"
     description: String
 
+    "Related modifier groups"
     modifierGroups: [ModifierGroup]
 
+    "Related modifier group IDs"
     modifierGroupIds: [ID] 
 
+}
+
+input ModifierGroupItemInput {
+    "Product Configuration data"
+    productConfiguration: ProductConfiguration!
+
+    "Pricing of the modifier group item"
+    pricing: ProductPricingInfo
+
+    "Title of the modifier group item"
+    title: String!
+
+    "Page title of the modifier group item"
+    pageTitle: String
+
+    "description of the modifier group item"
+    description: String
 }
 
 "Mutation input for a modifier group"
@@ -44,6 +73,9 @@ input ModifierGroupInput {
     
     "note for the modifier group"
     note: String
+
+    "modifier group items"
+    items: [ModifierGroupItemInput]!
 }
 
 "Input for the `createModifierGroup` mutation"
