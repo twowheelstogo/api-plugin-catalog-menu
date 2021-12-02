@@ -12,7 +12,8 @@ const namespaces = {
   Shop: "reaction/shop",
   DraftOrder: "reaction/draftOrder",
   Order: "reaction/order",
-  ModifierGroup: "reaction/modifierGroup"
+  ModifierGroup: "reaction/modifierGroup",
+  ModifierGroupItem: "reaction/modifierGroupItem"
 };
 
 export const encodeAccountOpaqueId = encodeOpaqueId(namespaces.Account);
@@ -24,6 +25,7 @@ export const encodeShopOpaqueId = encodeOpaqueId(namespaces.Shop);
 export const encondeDraftOrderOpaqueId = encodeOpaqueId(namespaces.DraftOrder);
 export const encodeOrderOpaqueId = encodeOpaqueId(namespaces.Order);
 export const encodeModifierGroupOpaqueId = encodeOpaqueId(namespaces.ModifierGroup);
+export const encodeModifierGroupItemOpaqueId = encodeOpaqueId(namespaces.ModifierGroupItem);
 
 export const decodeAccountOpaqueId = decodeOpaqueIdForNamespace(namespaces.Account);
 export const decodeAddressOpaqueId = decodeOpaqueIdForNamespace(namespaces.Address);
@@ -36,6 +38,7 @@ export const decodeShopOpaqueId = decodeOpaqueIdForNamespace(namespaces.Shop);
 export const decodeDraftOrderOpaqueId = decodeOpaqueIdForNamespace(namespaces.DraftOrder);
 export const decodeOrderOpaqueId = decodeOpaqueIdForNamespace(namespaces.Order);
 export const decodeModifierGroupOpaqueId = decodeOpaqueIdForNamespace(namespaces.ModifierGroup);
+export const decodeModifierGroupItemOpaqueId = decodeOpaqueIdForNamespace(namespaces.ModifierGroupItem);
 
 /**
  * @param {Object[]} items Array of OrderItemInput
@@ -63,4 +66,18 @@ export function decodeCartItemsOpaqueIds(items) {
       productVariantId: decodeProductOpaqueId(item.productConfiguration.productVariantId)
     }
   }));
+}
+
+/**
+ * @param {Object[]} items Array of ModifierGroupItemInput
+ * @returns {Object[]} Same array with all IDs transformed to internal
+ */
+export function decodeModifierGroupItemsOpaqueIds(items) {
+  return items.map((item) => ({
+    ...item,
+    productConfiguration: {
+      productId: decodeProductOpaqueId(item.productConfiguration.productId),
+      productVariantId: decodeProductOpaqueId(item.productConfiguration.productVariantId)
+    }
+  }))
 }

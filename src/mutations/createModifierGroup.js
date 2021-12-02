@@ -1,5 +1,6 @@
 import SimpleSchema from "simpl-schema";
 import Random from "@reactioncommerce/random";
+import mergeModifierGroupItems from "../util/mergeModifierGroupItems.js";
 
 /**
  * @method createModifierGroup
@@ -14,20 +15,24 @@ import Random from "@reactioncommerce/random";
  */
 export default async function createModifierGroup(context, input) {
     const { collections } = context;
-    const { ModifierGroup } = collections;
-    const { modifierGroupInput: { name, note } } = input;
+    const { ModifierGroups } = collections;
+    const { modifierGroup: { name, note, items: itemsInput, required } } = input;
 
+    const items = itemsInput && mergeModifierGroupItems(context, null, itemsInput);
+
+    console.log(items);
+    
     const modifierGroupInput = {
         _id: Random.id(),
         name,
         note,
         createdAt: new Date(),
         updatedAt: new Date(),
-        items: null,
-        required: false
+        items,
+        required
     };
 
-    await ModifierGroup.insertOne(modifierGroupInput);
+    await ModifierGroups.insertOne(modifierGroupInput);
 
     return modifierGroupInput;
 }

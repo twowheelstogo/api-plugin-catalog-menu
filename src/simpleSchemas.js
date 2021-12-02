@@ -14,11 +14,6 @@ import SimpleSchema from "simpl-schema";
  */
 export const ModifierGroupItem = new SimpleSchema({
     "_id": String,
-    "productConfiguration": {
-        type: Object,
-        blackbox: true,
-        optional: true
-    },
     "pricing": {
         type: Object,
         blackbox: true,
@@ -37,7 +32,9 @@ export const ModifierGroupItem = new SimpleSchema({
         type: Array,
         optional: true
     },
-    "modifierGroupIds.$": String
+    "modifierGroupIds.$": String,
+    "productId": String,
+    "variantId": String
 })
 
 /**

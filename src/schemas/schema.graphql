@@ -1,7 +1,7 @@
 "A Modifier Group"
 type ModifierGroup {
     "Modifier group ID"
-    id: ID!
+    _id: ID!
 
     "the name of the modifier group"
     name: String!
@@ -24,13 +24,13 @@ type ModifierGroup {
 
 type ModifierGroupItem {
     "ID of the item"
-    id: ID!
+    _id: ID!
 
     "Product configuration data"
     productConfiguration: ProductConfiguration!
 
     "Pricing of the modifier group item"
-    pricing: ProductPricingInfo
+    pricing: Money
 
     "Title of the modifier group item"
     title: String!
@@ -49,12 +49,13 @@ type ModifierGroupItem {
 
 }
 
+"Information about an item to add to modifier group"
 input ModifierGroupItemInput {
     "Product Configuration data"
-    productConfiguration: ProductConfiguration!
+    productConfiguration: ProductConfigurationInput!
 
     "Pricing of the modifier group item"
-    pricing: ProductPricingInfo
+    pricing: MoneyInput
 
     "Title of the modifier group item"
     title: String!
@@ -75,17 +76,41 @@ input ModifierGroupInput {
     note: String
 
     "modifier group items"
-    items: [ModifierGroupItemInput]!
+    items: [ModifierGroupItemInput]
+
+    "Check if modifier group is required"
+    required: Boolean
 }
 
 "Input for the `createModifierGroup` mutation"
 input CreateModifierGroupInput {
    "Modifier Group input"
-   modifierGroupInput: ModifierGroupInput!
+   modifierGroup: ModifierGroupInput!
+}
+
+"Input for the `addModifierGroupItems` mutation"
+input AddModifierGroupItemsInput {
+    "The modifier group ID to update"
+    modifierGroupId: ID!
+    
+    "Array of items to be added to modifier group"
+    items: [ModifierGroupItemInput]!
+
+    "An optional string identifying the mutation call, which will be returned in the response payload"
+    clientMutationId: String
 }
 
 "Response payload of `createModifierGroup` mutation"
 type CreateModifierGroupPayload {
+  "The same string you sent with the mutation params, for matching mutation calls with their responses"
+  clientMutationId: String
+
+  "The created modifier group"
+  modifierGroup: ModifierGroup!
+}
+
+"Response payload of `addModifierGroupItems` mutation"
+type AddModifierGroupItemsPayload {
   "The same string you sent with the mutation params, for matching mutation calls with their responses"
   clientMutationId: String
 
@@ -114,4 +139,15 @@ extend type Query {
     modifierGroup(
         id: ID!
     ): ModifierGroup!
+}
+
+extend type Mutation {
+    "creates a new modifier group"
+    createModifierGroup(
+        input: CreateModifierGroupInput!
+    ): CreateModifierGroupPayload!
+    "set new items into a existent modifier group"
+    addModifierGroupItems(
+        input: AddModifierGroupItemsInput!
+    ): AddModifierGroupItemsPayload!
 }
