@@ -3,17 +3,17 @@ import SimpleSchema from "simpl-schema";
 const filters = new SimpleSchema({
     "modifierGroupIds": {
         type: Array,
-        optional
+        optional: true
     },
     "modifierGroupIds.$": String,
     "shopIds": {
         type: Array,
-        optional
+        optional: true
     },
     "shopIds.$": String,
     "query": {
         type: String,
-        optional
+        optional: true
     }
 })
 
