@@ -143,10 +143,10 @@ For information about what Relay-compatible connections are and how to use them,
 """
 type ModifierGroupConnection {
     "The list of nodes that match the query, wrapped in an edge to provide a cursor string for each"
-    edges: [ProductBundle],
+    edges: [ModifierGroup],
 
     "You can request the `nodes` directly to avoid the extra wrapping that `NodeEdge` has, if you know you will not need to paginate the results."
-    nodes: [ProductBundle]
+    nodes: [ModifierGroup]
 
     "Information to help a client request the next or previous page"
     pageInfo: PageInfo!
